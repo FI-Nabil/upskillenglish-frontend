@@ -1,0 +1,70 @@
+<section>
+  <div class="container">
+    <div class="headtext">
+      <h1>Writing Test</h1>
+    </div>
+
+    <div class="loader" *ngIf="loading"></div>
+
+    <div *ngIf="!loading">
+      <!-- Pie chart section -->
+      <div *ngIf="!essaySectionVisible">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h1 style="font-size: 25px;">Part-1</h1>
+          <h1 style="font-size: 25px;">Mark-10</h1>
+        </div>
+        <div class="chart-container">
+          <div class="card pie-chart">
+            <h3>{{ year1Label }}</h3>
+            <ngx-charts-pie-chart [view]="view" [results]="year1Data" [legend]="false" [labels]="true"
+              [doughnut]="false"></ngx-charts-pie-chart>
+          </div>
+
+          <div class="card pie-chart">
+            <h3>{{ year2Label }}</h3>
+            <ngx-charts-pie-chart [view]="view" [results]="year2Data" [legend]="false" [labels]="true"
+              [doughnut]="false"></ngx-charts-pie-chart>
+          </div>
+        </div>
+
+        <div class="writing-prompt card">
+          <p>{{ writingPrompt }}</p>
+        </div>
+
+        <div class="answer-section card">
+          <h3>Your Answer</h3>
+          <textarea [(ngModel)]="userAnswer" rows="4" class="answer-textarea"
+            placeholder="Type your answer here..."></textarea>
+          <div class="button-container">
+            <button (click)="submitPieChartAnswer()" class="submit-button">Submit Answer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Essay section -->
+      <div *ngIf="essaySectionVisible">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h1 style="font-size: 25px;">Part-2</h1>
+          <h1 style="font-size: 25px;">Mark-10</h1>
+        </div>
+        <div class="essay-section card">
+          <h3>Essay Topic</h3>
+          <p class="essay-topic">{{ essayTopic }}</p>
+          <p class="essay-instruction">Write a clear and well-structured essay on the given topic. Your response should
+            be between 250-300 words.</p>
+          <textarea [(ngModel)]="userEssay" rows="8" class="answer-textarea"
+            placeholder="Write your essay here..."></textarea>
+          <div class="button-container">
+            <button (click)="submitEssayAnswer()" class="submit-button">Submit Essay</button>
+          </div>
+        </div>
+
+        <div class="score-section" *ngIf="essayScore !== null">
+          <h3>Your Total Score: {{ totalScore }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading" class="countdown"> {{ minutes }}:{{ seconds }} </div>
+  </div>
+</section>
